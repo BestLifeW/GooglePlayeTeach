@@ -14,9 +14,10 @@ import com.lovec.googleplayeteach.utils.BitmapHelper;
 import com.lovec.googleplayeteach.utils.UIUtils;
 
 /**
+ * 应用Holder
  * Created by lovec on 2016/8/27.
  */
-public class HomeHolder extends BaseHolder<AppInfo> {
+public class AppHolder extends BaseHolder<AppInfo> {
 
     private TextView tvContent;
     private TextView tvName;

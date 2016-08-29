@@ -1,7 +1,6 @@
 package com.lovec.googleplayeteach.ui.fragment;
 
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lovec.googleplayeteach.domain.AppInfo;
@@ -10,6 +9,7 @@ import com.lovec.googleplayeteach.ui.adapter.MyBaseAdapter;
 import com.lovec.googleplayeteach.ui.holder.BaseHolder;
 import com.lovec.googleplayeteach.ui.holder.HomeHolder;
 import com.lovec.googleplayeteach.ui.view.LoadingPage.ResultState;
+import com.lovec.googleplayeteach.ui.view.MyListView;
 import com.lovec.googleplayeteach.utils.UIUtils;
 
 import java.util.ArrayList;
@@ -26,9 +26,7 @@ public class HomeFragment extends BaseFragment {
     // 如果加载数据成功, 就回调此方法, 在主线程运行
     @Override
     public View onCreateSuccessView() {
-        // TextView view = new TextView(UIUtils.getContext());
-        // view.setText(getClass().getSimpleName());
-        ListView view = new ListView(UIUtils.getContext());
+        MyListView  view = new MyListView (UIUtils.getContext());
         view.setAdapter(new HomeAdapter(data));
         return view;
     }

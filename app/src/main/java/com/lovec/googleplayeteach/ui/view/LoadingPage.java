@@ -3,6 +3,7 @@ package com.lovec.googleplayeteach.ui.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.lovec.googleplayeteach.R;
@@ -53,6 +54,15 @@ public abstract class LoadingPage extends FrameLayout {
         //加载失败的布局
         if (mErrorPage == null) {
             mErrorPage = UIUtils.inflate(R.layout.page_error);
+            Button btnRetry = (Button) mErrorPage.findViewById(R.id.btn_retry);
+            btnRetry.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //点击重新加载数据
+                    loadData();
+                }
+            });
+
             addView(mErrorPage);
         }
         //加载数据为空
