@@ -9,7 +9,7 @@ import android.graphics.drawable.StateListDrawable;
  */
 public class DrawableUtils {
 
-    public static GradientDrawable getGradientDrawable(int color , int radius){
+    public static GradientDrawable getGradientDrawable(int color, int radius) {
         GradientDrawable shape = new GradientDrawable();
 
         shape.setShape(GradientDrawable.RECTANGLE);
@@ -17,11 +17,12 @@ public class DrawableUtils {
         shape.setColor(color);
         return shape;
     }
+
     //获取状态选择器
     public static StateListDrawable getSelector(Drawable normal, Drawable press) {
         StateListDrawable selector = new StateListDrawable();
-        selector.addState(new int[] { android.R.attr.state_pressed }, press);// 按下图片
-        selector.addState(new int[] {}, normal);// 默认图片
+        selector.addState(new int[]{android.R.attr.state_pressed}, press);// 按下图片
+        selector.addState(new int[]{}, normal);// 默认图片
 
         return selector;
     }

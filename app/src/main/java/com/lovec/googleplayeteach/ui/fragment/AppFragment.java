@@ -1,5 +1,6 @@
 package com.lovec.googleplayeteach.ui.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.lovec.googleplayeteach.domain.AppInfo;
@@ -41,7 +42,7 @@ public class AppFragment extends BaseFragment {
         }
 
         @Override
-        public BaseHolder<AppInfo> getHolder() {
+        public BaseHolder<AppInfo> getHolder(int position) {
             return new AppHolder();
         }
 
@@ -51,5 +52,14 @@ public class AppFragment extends BaseFragment {
             ArrayList<AppInfo> moreData = appProtocol.getData(getListSize());
             return moreData;
         }
+    }
+
+    public static AppFragment newInstance() {
+        
+        Bundle args = new Bundle();
+        
+        AppFragment fragment = new AppFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 }

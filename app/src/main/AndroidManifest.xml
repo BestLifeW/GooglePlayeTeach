@@ -3,6 +3,7 @@
     package="com.lovec.googleplayeteach">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".global.GooglePlayApplication"
         android:allowBackup="true"
@@ -17,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.HomeDetiailActivity"></activity>
     </application>
 
 </manifest>

@@ -1,12 +1,17 @@
 package com.lovec.googleplayeteach.ui.fragment;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.lovec.googleplayeteach.domain.AppInfo;
 import com.lovec.googleplayeteach.http.protocol.HomeProtocol;
+import com.lovec.googleplayeteach.ui.activity.HomeDetiailActivity;
 import com.lovec.googleplayeteach.ui.adapter.MyBaseAdapter;
 import com.lovec.googleplayeteach.ui.holder.BaseHolder;
+import com.lovec.googleplayeteach.ui.holder.HomeHeaderHolder;
 import com.lovec.googleplayeteach.ui.holder.HomeHolder;
 import com.lovec.googleplayeteach.ui.view.LoadingPage.ResultState;
 import com.lovec.googleplayeteach.ui.view.MyListView;
@@ -22,12 +27,33 @@ public class HomeFragment extends BaseFragment {
 
     // private ArrayList<String> data;
     private ArrayList<AppInfo> data;
+    private ArrayList<String> mPictureList;
 
     // 如果加载数据成功, 就回调此方法, 在主线程运行
     @Override
     public View onCreateSuccessView() {
-        MyListView  view = new MyListView (UIUtils.getContext());
+        MyListView view = new MyListView(UIUtils.getContext());
+
+        HomeHeaderHolder HeaderHolder = new HomeHeaderHolder();
+        view.addHeaderView(HeaderHolder.getRootView());//先添加头布局 在设置adapter
         view.setAdapter(new HomeAdapter(data));
+        if (mPictureList != null) {
+            HeaderHolder.setData(mPictureList);
+        }
+
+        view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                AppInfo appInfo = data.get(position - 1);//-1去掉头布局
+                if (appInfo != null) {
+                    Intent intent = new Intent(UIUtils.getContext(), HomeDetiailActivity.class);
+                    intent.putExtra("packageName",appInfo.packageName);
+                    startActivity(intent);
+                }
+            }
+        });
+
         return view;
     }
 
@@ -41,7 +67,7 @@ public class HomeFragment extends BaseFragment {
         // }
         HomeProtocol protocol = new HomeProtocol();
         data = protocol.getData(0);// 加载第一页数据
-
+        mPictureList = protocol.getPicturelist();
         return check(data);// 校验数据并返回
     }
 
@@ -52,7 +78,7 @@ public class HomeFragment extends BaseFragment {
         }
 
         @Override
-        public BaseHolder<AppInfo> getHolder() {
+        public BaseHolder<AppInfo> getHolder(int position) {
             return new HomeHolder();
         }
 
@@ -71,4 +97,12 @@ public class HomeFragment extends BaseFragment {
         public TextView tvContent;
     }
 
+    public static HomeFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        HomeFragment fragment = new HomeFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 }

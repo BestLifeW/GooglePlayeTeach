@@ -2,7 +2,7 @@ package com.lovec.googleplayeteach.ui.fragment;
 
 import java.util.HashMap;
 
-/**
+/*
  * 生产fragment的工厂
  * Created by lovec on 2016/8/27.
  */
@@ -11,15 +11,15 @@ public class FragmentFactory {
     private static HashMap<Integer, BaseFragment> mFragmentMap = new HashMap<Integer, BaseFragment>();
 
     public static BaseFragment createFragment(int pos) {
-        //先从集合中，如果没有才创建对象
+        //先从集合中，如果没有才创建对象0000000000000000000000000000000000000
         BaseFragment fragment = mFragmentMap.get(pos);
         if (fragment == null) {
             switch (pos) {
                 case 0:
-                    fragment = new HomeFragment();
+                    fragment = HomeFragment.newInstance();
                     break;
                 case 1:
-                    fragment = new AppFragment();
+                    fragment = AppFragment.newInstance();
                     break;
                 case 2:
                     fragment = new GameFragment();
@@ -43,6 +43,4 @@ public class FragmentFactory {
         mFragmentMap.put(pos, fragment);
         return fragment;
     }
-
-    ;
 }

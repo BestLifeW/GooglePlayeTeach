@@ -13,6 +13,8 @@ import java.util.ArrayList;
  */
 public class HomeProtocol extends BaseProtocol<ArrayList<AppInfo>> {
 
+    private ArrayList<String> pictures;
+
     @Override
     public String getKey() {
         return "home";
@@ -33,6 +35,7 @@ public class HomeProtocol extends BaseProtocol<ArrayList<AppInfo>> {
 
             for (int i = 0; i < list.length(); i++) {
                 JSONObject jo1 = list.getJSONObject(i);
+
                 AppInfo info = new AppInfo();
                 info.des = jo1.getString("des");
                 info.downloadUrl = jo1.getString("downloadUrl");
@@ -46,7 +49,7 @@ public class HomeProtocol extends BaseProtocol<ArrayList<AppInfo>> {
                 appInfoList.add(info);
             }
             JSONArray ja1 = jsonObject.getJSONArray("picture");
-            ArrayList<String> pictures = new ArrayList<String>();
+            pictures = new ArrayList<String>();
             for (int i = 0; i < ja1.length(); i++) {
                 String pic = ja1.getString(i);
                 pictures.add(pic);
@@ -56,5 +59,9 @@ public class HomeProtocol extends BaseProtocol<ArrayList<AppInfo>> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public ArrayList<String> getPicturelist() {
+        return pictures;
     }
 }
